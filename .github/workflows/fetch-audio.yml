@@ -1,0 +1,23 @@
+name: fetch-audio
+on:
+  push:
+    paths:
+      - '.github/workflows/fetch-audio.yml'
+jobs:
+  fetch:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Download approved voiceovers
+        run: |
+          curl -L --fail --retry 3 'https://www.aidocmaker.com/g0/audio?name=363ad3be80ef4e34a406163d6ba9088f' -o cn.mp3
+          curl -L --fail --retry 3 'https://www.aidocmaker.com/g0/audio?name=93ab8b1667a14bac8f34d3147262843d' -o en.mp3
+          file cn.mp3 en.mp3
+          ls -lh cn.mp3 en.mp3
+      - name: Upload audio
+        uses: actions/upload-artifact@v4
+        with:
+          name: approved-voiceovers
+          path: |
+            cn.mp3
+            en.mp3
+          retention-days: 1
