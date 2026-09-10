@@ -12,12 +12,11 @@ jobs:
           curl -L --fail --retry 3 'https://storage.googleapis.com/adm--audio-playback--7d--public/mcp-preview/f3a82537-5bbc-4464-b9c2-35f815b3b07d.mp3' -o cn.mp3
           curl -L --fail --retry 3 'https://storage.googleapis.com/adm--audio-playback--7d--public/mcp-preview/86022556-d4a2-4750-b1b2-3c6a70772b5b.mp3' -o en.mp3
           file cn.mp3 en.mp3
-          ffprobe -v error -show_entries format=duration,size -of default=noprint_wrappers=1 cn.mp3
-          ffprobe -v error -show_entries format=duration,size -of default=noprint_wrappers=1 en.mp3
+          ls -lh cn.mp3 en.mp3
       - name: Upload audio
         uses: actions/upload-artifact@v4
         with:
-          name: approved-voiceovers-v2
+          name: approved-voiceovers-v3
           path: |
             cn.mp3
             en.mp3
