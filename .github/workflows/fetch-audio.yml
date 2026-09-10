@@ -7,16 +7,16 @@ jobs:
   fetch:
     runs-on: ubuntu-latest
     steps:
-      - name: Download final voiceovers
+      - name: Download final matched voiceovers
         run: |
           curl -L --fail --retry 3 'https://storage.googleapis.com/adm--audio-playback--7d--public/mcp-preview/0827b97f-3b43-4239-8679-02b1ef43b723.mp3' -o cn.mp3
-          curl -L --fail --retry 3 'https://storage.googleapis.com/adm--audio-playback--7d--public/mcp-preview/72e6d972-a8d7-43ba-88d2-1d950af52366.mp3' -o en.mp3
+          curl -L --fail --retry 3 'https://storage.googleapis.com/adm--audio-playback--7d--public/mcp-preview/d88414c3-211a-4da5-90c9-a322d1fdceed.mp3' -o en.mp3
           file cn.mp3 en.mp3
           ls -lh cn.mp3 en.mp3
       - name: Upload audio
         uses: actions/upload-artifact@v4
         with:
-          name: final-voiceovers
+          name: final-matched-voiceovers
           path: |
             cn.mp3
             en.mp3
