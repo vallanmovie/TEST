@@ -1,4 +1,4 @@
-name: fetch-audio
+name: fetch-stock-clips
 on:
   push:
     paths:
@@ -7,17 +7,17 @@ jobs:
   fetch:
     runs-on: ubuntu-latest
     steps:
-      - name: Download final matched voiceovers
+      - name: Download Pexels free stock clips
         run: |
-          curl -L --fail --retry 3 'https://storage.googleapis.com/adm--audio-playback--7d--public/mcp-preview/0827b97f-3b43-4239-8679-02b1ef43b723.mp3' -o cn.mp3
-          curl -L --fail --retry 3 'https://storage.googleapis.com/adm--audio-playback--7d--public/mcp-preview/d88414c3-211a-4da5-90c9-a322d1fdceed.mp3' -o en.mp3
-          file cn.mp3 en.mp3
-          ls -lh cn.mp3 en.mp3
-      - name: Upload audio
+          curl -L --fail --retry 3 'https://videos.pexels.com/video-files/11272939/11272939-hd_1080_1920_25fps.mp4' -o dawn.mp4 || curl -L --fail --retry 3 'https://videos.pexels.com/video-files/11272939/11272939-uhd_2160_3840_25fps.mp4' -o dawn.mp4
+          curl -L --fail --retry 3 'https://videos.pexels.com/video-files/6305036/6305036-hd_1920_1080_25fps.mp4' -o family.mp4 || curl -L --fail --retry 3 'https://videos.pexels.com/video-files/6305036/6305036-uhd_3840_2160_25fps.mp4' -o family.mp4
+          curl -L --fail --retry 3 'https://videos.pexels.com/video-files/8477565/8477565-hd_1920_1080_25fps.mp4' -o rain.mp4
+          curl -L --fail --retry 3 'https://videos.pexels.com/video-files/4154532/4154532-hd_1920_1080_24fps.mp4' -o fire.mp4 || curl -L --fail --retry 3 'https://videos.pexels.com/video-files/4154532/4154532-uhd_3840_2160_24fps.mp4' -o fire.mp4
+          file *.mp4
+          ls -lh *.mp4
+      - name: Upload clips
         uses: actions/upload-artifact@v4
         with:
-          name: final-matched-voiceovers
-          path: |
-            cn.mp3
-            en.mp3
+          name: pexels-stock-clips
+          path: '*.mp4'
           retention-days: 1
